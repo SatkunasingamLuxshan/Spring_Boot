@@ -48,7 +48,7 @@ public class CourseServiceImpl implements CourseService {
     public String deleteCourse(long id) {
         Optional<Course> course = courseRepo.findById(id);
         if(course.isEmpty()){
-            throw new RuntimeException("Course details not found");
+            throw new RuntimeException("😔Course Deatils not Found! Please Check Your ID");
         }
         else {
             courseRepo.delete(course.get());
@@ -60,7 +60,7 @@ public class CourseServiceImpl implements CourseService {
     public String updateCourse(RequestCourseDTO dto,long id) {
         Optional<Course> course = courseRepo.findById(id);
         if(course.isEmpty()){
-            throw new RuntimeException("Course Deatils not found");
+            throw new RuntimeException("😔Course Deatils not Found! Please Check Your ID");
         }
         else {
             course.get().setCourseName(dto.getCourseName());
@@ -76,7 +76,7 @@ public class CourseServiceImpl implements CourseService {
     public ResponseCourseDTO getCourseById(long id) {
         Optional<Course> course = courseRepo.findById(id);
         if(course.isEmpty()){
-            throw new RuntimeException("Course details not found");
+            throw new RuntimeException("😔Course Deatils not Found! Please Check Your ID");
         } else {
             Course c = course.get();
             return new ResponseCourseDTO(c.getCourseName(), c.getDescription(), c.getDuration());

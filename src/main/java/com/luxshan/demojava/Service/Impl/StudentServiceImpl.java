@@ -24,7 +24,8 @@ public class StudentServiceImpl implements StudentService {
                 dto1.getCourse()
         );
         studentRepo.save(s);
-        return dto1.getFirstName();
+        return dto1.getFirstName()+" "+dto1.getLastName();
+
 
 
     }
@@ -33,11 +34,11 @@ public class StudentServiceImpl implements StudentService {
     public String deleteStudent(long id) {
         Optional<Student> student = studentRepo.findById(id);
         if(student.isEmpty()){
-            throw new RuntimeException("Student not found");
+            throw new RuntimeException("😔Student Record not Found! Please Check Your ID");
         }
         else {
             studentRepo.delete(student.get());
-            return student.get().getFirstName();
+            return student.get().getFirstName()+" "+student.get().getLastName();
         }
 
     }
@@ -59,10 +60,10 @@ public class StudentServiceImpl implements StudentService {
     }
 
 //Update a Record
-    public String updateStudent(RequestStudentDTO dto,long id) {
+   public String updateStudent(RequestStudentDTO dto,long id) {
         Optional<Student> student = studentRepo.findById(id);
         if(student.isEmpty()){
-            throw new RuntimeException("Student not found");
+            throw new RuntimeException("😔Student Record not Found! Please Check Your ID.");
         }
         else {
             student.get().setFirstName(dto.getFirstName());
@@ -70,14 +71,14 @@ public class StudentServiceImpl implements StudentService {
             student.get().setEmail(dto.getEmail());
             student.get().setCourse(dto.getCourse());
             studentRepo.save(student.get());
-            return dto.getFirstName();
+            return dto.getFirstName()+ " "+dto.getLastName();
         }
     }
     //Get Record By ID
     public ResponseStudentDTO getStudentById(long id) {
         Optional<Student> student = studentRepo.findById(id);
         if(student.isEmpty()){
-            throw new RuntimeException("Student details not found");
+            throw new RuntimeException("😔Student Record not Found! Please Check Your ID.");
         } else {
             Student s = student.get();
             return new ResponseStudentDTO(
@@ -87,4 +88,6 @@ public class StudentServiceImpl implements StudentService {
                     s.getCourse());
         }
     }
+
+
 }

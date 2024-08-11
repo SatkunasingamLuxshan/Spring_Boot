@@ -21,7 +21,7 @@ public class CourseController {
             @RequestBody RequestCourseDTO dto1)
     {
         return new ResponseEntity<>(new StandardResponse(
-                "Data Saved!",
+                " Course Deatils Saved!",
                 200,
                 courseService.saveCourse(dto1)),
                 HttpStatus.OK);
